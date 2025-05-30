@@ -1,0 +1,22 @@
+---
+
+- name: Install Smartmontools
+  ansible.builtin.apt:
+    name: smartmontools
+    update_cache: true
+
+- name: Remove zabbix-smartctl from sudoers file
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: absent
+    regexp: 'zabbix.*smartctl'
+    validate: /usr/sbin/visudo -cf %s
+
+- name: Allow zabbix to read S.M.A.R.T values (in /etc/sudoers.d)
+  community.general.sudoers:
+    name: sudoers_zabbix_smartctl
+    user: zabbix
+    commands:
+      - /usr/sbin/smartctl
+    nopassword: true
+    sudoers_path: /etc/sudoers.d
