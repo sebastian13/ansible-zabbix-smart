@@ -15,6 +15,7 @@ ansible-galaxy install sebastian13.zabbix_smart --force
 
 - name: SMART by Zabbix agent 2
   hosts: physical
+  become: true
 
   roles:
     - role: sebastian13.zabbix_smart
