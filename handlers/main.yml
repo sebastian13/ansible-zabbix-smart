@@ -1,0 +1,10 @@
+---
+# https://github.com/ansible-collections/community.zabbix/blob/main/roles/zabbix_agent/handlers/main.yml
+# handlers file for zabbix-agent
+
+- name: Restart zabbix-agent
+  ansible.builtin.service:
+    name: "{{ zabbix_agent_service }}"
+    state: restarted
+    enabled: true
+  become: true

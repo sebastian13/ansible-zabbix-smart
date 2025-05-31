@@ -1,0 +1,1 @@
+zabbix_agent_service: "{{ _zabbix_agent_service | default(zabbix_agent2 | ternary('zabbix-agent2', 'zabbix-agent')) }}"

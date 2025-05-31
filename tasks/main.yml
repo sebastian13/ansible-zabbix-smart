@@ -20,3 +20,14 @@
       - /usr/sbin/smartctl
     nopassword: true
     sudoers_path: /etc/sudoers.d
+
+- name: Add UserParameter for smartctl self-test
+  ansible.builtin.template:
+    src: smart_selftests.conf.j2
+    dest: /etc/zabbix/zabbix_agent2.d/smart_selftests.conf
+    owner: zabbix
+    group: zabbix
+    mode: '0644'
+  notify:
+    - Restart zabbix-agent
+  become: true
