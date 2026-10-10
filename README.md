@@ -1,22 +1,41 @@
-# Ansible Zabbix S.M.A.R.T. for Zabbix agent 2
+# Ansible Zabbix SMART
 
-This role installs smartmontools and allows Zabbix to read S.M.A.R.T values via sudo as required by the official Template https://www.zabbix.com/integrations/smart.
+This role installs `smartmontools` and configures the system so Zabbix Agent 2 can read S.M.A.R.T. values via `sudo`, matching the requirements of the official Zabbix template for SMART monitoring.
 
-### Install
+## Installation
 
-```shell
-ansible-galaxy install sebastian13.zabbix_smart --force 
+Install from Ansible Galaxy:
+
+```bash
+ansible-galaxy role install sebastian13.zabbix_smart -p roles
 ```
 
-### Example Playbook
+Or clone it locally:
+
+```bash
+git clone https://github.com/sebastian13/ansible-zabbix-smart.git roles/zabbix_smart
+```
+
+## Example Playbook
 
 ```yaml
 ---
-
-- name: SMART by Zabbix agent 2
+- name: Install Zabbix SMART monitoring
   hosts: physical
   become: true
 
   roles:
     - role: sebastian13.zabbix_smart
 ```
+
+## Requirements
+
+- Zabbix Agent 2 installed on the target host
+- `sudo` available and configured to permit the Zabbix user to run SMART checks
+- SMART-capable drives present on the system
+
+## References
+
+- [Zabbix SMART integration](https://www.zabbix.com/integrations/smart)
+- [smartmontools project](https://www.smartmontools.org/)
+
